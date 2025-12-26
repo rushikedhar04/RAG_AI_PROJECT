@@ -1,15 +1,3 @@
-# RAG AI Project — Video Q&A with Timestamps
-
-A full-stack, local-first Video RAG system:
-- Upload a video
-- Auto-transcribe with timestamps
-- Build a searchable vector index
-- Ask questions and get timestamped sources
-- Click a source to jump the video player to that moment
-
-## Architecture
-
-```mermaid
 flowchart TB
   subgraph UI[Frontend UI - Streamlit]
     U1[Upload Video]
@@ -20,10 +8,10 @@ flowchart TB
 
   subgraph API[Backend API - FastAPI]
     A1[POST /videos/upload]
-    A2[POST /videos/{id}/process]
-    A3[GET /videos/{id}/status]
+    A2[POST /videos/:id/process]
+    A3[GET /videos/:id/status]
     A4[POST /query]
-    A5[GET /videos/{id}/stream]
+    A5[GET /videos/:id/stream]
   end
 
   subgraph JOBS[Background Worker - local]
@@ -33,7 +21,7 @@ flowchart TB
 
   subgraph PIPE[AI Pipeline]
     P1[faster-whisper: transcript segments<br/>start/end timestamps]
-    P2[Chunker: create text chunks<br/>with (start,end)]
+    P2[Chunker: create text chunks<br/>with start,end]
     P3[Embeddings: sentence-transformers]
     P4[Vector Index: FAISS]
     P5[RAG Retriever: top-k chunks + sources]
