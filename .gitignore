@@ -28,3 +28,10 @@ videos/
 *.mp4
 *.mov
 *.mkv
+
+# Do not commit raw media
+videos/
+*.webm
+*.mp4
+*.mov
+*.mkv
